@@ -1,0 +1,39 @@
+/*
+ * This Java file contains the solution which corresponds to the first solution on main program/subroutine
+ * with shared data in the paper by Garlan & Shaw.
+ */
+
+import static org.junit.Assert.*;
+
+import java.util.Scanner;
+
+public class MainProgWithFunctions {
+
+	public static void main(String[] args) {
+
+		assertTrue("Input processing failed!", processInput());
+		assertTrue("Shift did not execute properly!", executeShift());
+		assertTrue("Output was not sorted successfully!", sortOutput());
+		assertTrue("Printing the output to screen failed!", printOutput());
+	}
+
+	private static boolean processInput() {
+		
+		Scanner sc = new Scanner(System.in);
+		String inputLines = sc.next();
+		sc.close();
+		return true;
+	}
+	
+	private static boolean executeShift() {
+		return true;
+	}
+	
+	private static boolean sortOutput() {
+		return true;
+	}
+	
+	private static boolean printOutput() {
+		return true;
+	}
+}
