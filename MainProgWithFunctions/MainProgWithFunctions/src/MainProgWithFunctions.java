@@ -7,7 +7,6 @@
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
@@ -30,10 +29,20 @@ public class MainProgWithFunctions {
     private static String[] processUserInput() {
 
         Scanner sc = new Scanner(System.in);
-
-        String rawIgnoreWords = sc.nextLine();
-        ignoreWords = Arrays.asList(rawIgnoreWords.split(", "));
-
+                
+        while (true) {
+            String rawIgnoreInput = sc.nextLine();
+            if (rawIgnoreInput.charAt(0) == (64)) {
+                break;
+            }
+            
+            String[] ignoreInput = rawIgnoreInput.split(", ");
+            for (String word : ignoreInput) {
+                ignoreWords.add(word);
+            }
+            
+        }
+        
         String rawInput = sc.nextLine();
         String[] inputLines = rawInput.split(", ");
 
