@@ -1,0 +1,11 @@
+a
+the
+apple
+pineapple
+banana
+fruit
+break
+chaos
+what
+@
+Word With Zero Ignore Words, How Well Does It Handle a Long Sentance With Many Permutations Which Cause Space Issues And Slow The System Very Much, apple pineapple banana Juice fruit Juice Watermelon
