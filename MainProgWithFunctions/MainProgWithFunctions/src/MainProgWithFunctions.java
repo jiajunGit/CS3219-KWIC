@@ -37,7 +37,10 @@ public class MainProgWithFunctions {
         String rawInput = sc.nextLine();
         String[] inputLines = rawInput.split(", ");
 
-        sc.close();
+        if (sc != null) {
+            sc.close();
+        }
+        
         return inputLines;
     }
 
@@ -54,14 +57,20 @@ public class MainProgWithFunctions {
             int lengthOfLine = lineToShift.length;
             int notIgnoreWordCount = 0;
             Boolean isNotDuplicate = true;
+            ArrayList<String> allCurrentLineShifts = new ArrayList<String>();
 
             while (isNotDuplicate) {
 
+                Boolean isIgnoreWord = false;                
+                
                 for (int j = 0; j < ignoreWords.size(); j++) {
-                    if (!(lineToShift[0].equals(ignoreWords.get(j)))) {
-                        notIgnoreWordCount += 1;
-                        break;
+                    if (lineToShift[0].equals(ignoreWords.get(j))) {
+                        isIgnoreWord = true;
                     }
+                }
+                
+                if (!(isIgnoreWord)) {
+                    notIgnoreWordCount += 1;
                 }
 
                 if (notIgnoreWordCount == 2) {
@@ -73,11 +82,20 @@ public class MainProgWithFunctions {
                     }
 
                     String shiftedLine = strBuf.toString();
-                    lines.add(shiftedLine);
                     
-                    // TODO: Add duplicate check (to determine when end of loop)
+                    for (int l = 0; l < allCurrentLineShifts.size(); l++) {
+                        if (shiftedLine.equals(allCurrentLineShifts.get(l))) {
+                            isNotDuplicate = false;
+                            break;
+                        }
+                    }
                     
-                    break;
+                    if (isNotDuplicate) {
+                        lines.add(shiftedLine);
+                        allCurrentLineShifts.add(shiftedLine);
+                    } else {
+                        break;
+                    }
                     
                 } else {
                     String temp = lineToShift[0];
