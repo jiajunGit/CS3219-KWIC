@@ -86,7 +86,8 @@ public class MainProgWithFunctions {
                     notIgnoreWordCount = 0;
                     
                     StringBuffer strBuf = new StringBuffer();
-                    for (int k = 0; k < lineToShift.length; k++) {
+                    strBuf.append(lineToShift[0]);
+                    for (int k = 1; k < lineToShift.length; k++) {
                         strBuf.append(" ").append(lineToShift[k]);
                     }
 
