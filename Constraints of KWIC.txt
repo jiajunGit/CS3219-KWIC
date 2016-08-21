@@ -1,0 +1,31 @@
+Rules for the KWIC system:
+
+1) Duplicate input lines will not be removed because KWIC is a system that allows search for keywords in each line
+
+2) lines generated from shifts with have any lines with a stop word as its first word (keyword) removed
+
+  e.g:
+
+  Assume Fast is a stop word
+
+  line 1:   Fast Fast Furious
+
+  shifted:
+  Fast Fast Furious <- discard
+  Fast Furious Fast <- discard
+  Furious Fast Fast <- keep
+
+3) Lines generated from shifts using lines with duplicate words ( i.e Fast Fast Furious ) will have any lines with a duplicate first word (keyword) removed - rationale: KWIC allows user to search for unique keywords on each line
+
+   e.g:
+   Fast Fast Furious <- keep
+   Fast Furious Fast <- discard
+   Furious Fast Fast <- keep
+
+4) Lines are sorted by the first word (keyword) only
+
+
+[Further notes]
+  - Please add any more rules that you may think of
+  - Rules might be written not clearly, feel free to enhance or clarify the above rules
+  - Change any rules you dont think is right (but please make notes of any changes)
