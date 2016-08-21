@@ -1,7 +1,7 @@
 
 public class KWIC {
 
-	private static final String INPUT_FILENAME = "C:\\Users\\WorkBench\\Desktop\\test.txt"; // Change to a valid file name to run
+	private static final String INPUT_FILENAME = "TestCases/input1.in";
 	
 	public static void main( String []args ){
 		
