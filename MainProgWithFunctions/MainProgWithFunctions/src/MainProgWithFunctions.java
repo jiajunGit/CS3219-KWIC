@@ -36,6 +36,7 @@ public class MainProgWithFunctions {
                 break;
             }
             
+            rawIgnoreInput = rawIgnoreInput.toLowerCase();
             String[] ignoreInput = rawIgnoreInput.split(", ");
             for (String word : ignoreInput) {
                 ignoreWords.add(word);
@@ -44,6 +45,7 @@ public class MainProgWithFunctions {
         }
         
         String rawInput = sc.nextLine();
+        rawInput = rawInput.toLowerCase();
         String[] inputLines = rawInput.split(", ");
 
         if (sc != null) {
@@ -62,8 +64,26 @@ public class MainProgWithFunctions {
         ArrayList<String> lines = new ArrayList<String>();
 
         for (int i = 0; i < originalInput.length; i++) {
+        	
             String[] lineToShift = originalInput[i].split(" "); 
+         
             int lengthOfLine = lineToShift.length;
+            for (int x = 0; x < lengthOfLine; x++) {
+            	Boolean isNotIgnoreWord = true;
+            	for (int y = 0; y < ignoreWords.size(); y++) {
+            		if (lineToShift[x].equals(ignoreWords.get(y))) {
+            			isNotIgnoreWord = false;
+            		}
+            	}
+            	if (isNotIgnoreWord) {
+            		if (lineToShift[x].length() > 1) {
+            			lineToShift[x] = lineToShift[x].substring(0, 1).toUpperCase() + lineToShift[x].substring(1);
+            		} else {
+            			lineToShift[x] = lineToShift[x].toUpperCase();
+            		}
+            	}
+            }
+            
             int notIgnoreWordCount = 0;
             Boolean isNotDuplicate = true;
             ArrayList<String> allCurrentLineShifts = new ArrayList<String>();
@@ -75,7 +95,7 @@ public class MainProgWithFunctions {
                 for (int j = 0; j < ignoreWords.size(); j++) {
                     if (lineToShift[0].equals(ignoreWords.get(j))) {
                         isIgnoreWord = true;
-                    }
+                    } 
                 }
                 
                 if (!(isIgnoreWord)) {
