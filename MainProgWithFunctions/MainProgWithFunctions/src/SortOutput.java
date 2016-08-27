@@ -7,11 +7,10 @@ public class SortOutput {
      * Conducts the sorting of the combinations by alphabetical order
      * @return Sorted output
      */
-	public static void sortOutput() {
+	public static ArrayList<String> sortOutput(ArrayList<String> listToSort) {
 
-		ArrayList<String> listToSort = MainProgWithFunctions.getUnsortedList();
 		Collections.sort(listToSort);
-        MainProgWithFunctions.setSortedList(listToSort);
+        return listToSort;
     }
 
 	

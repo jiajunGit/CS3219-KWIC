@@ -6,7 +6,7 @@ public class ExecuteShift {
      * Executes the circular shift for the input lines
      * @return All of the possible combinations
      */
-	public static void executeShift(String[] originalInput) {
+	public static ArrayList<String> executeShift(String[] originalInput) {
 
         ArrayList<String> lines = new ArrayList<String>();
 
@@ -85,7 +85,7 @@ public class ExecuteShift {
             }
         }
 
-        MainProgWithFunctions.setUnsortedList(lines);
+        return lines;
     }
 
 

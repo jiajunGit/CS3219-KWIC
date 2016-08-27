@@ -11,15 +11,13 @@ import java.util.ArrayList;
 public class MainProgWithFunctions {
 
     private static List<String> ignoreWords = new ArrayList<String>();
-    private static ArrayList<String> unsortedList = new ArrayList<String>();
-    private static ArrayList<String> sortedList = new ArrayList<String>();
     
     public static void main(String[] args) {
 
         String[] inputLines = ProcessUserInput.processUserInput();
-        ExecuteShift.executeShift(inputLines);
-        SortOutput.sortOutput();
-        PrintOutput.printOutput();
+        ArrayList<String> unsortedList = ExecuteShift.executeShift(inputLines);
+        ArrayList<String> sortedList = SortOutput.sortOutput(unsortedList);
+        PrintOutput.printOutput(sortedList);
     }
 
     public static List<String> getIgnoreWords() {
@@ -28,22 +26,6 @@ public class MainProgWithFunctions {
     
     public static void setIgnoreWords(List<String> ignoreWords) {
     	MainProgWithFunctions.ignoreWords = ignoreWords;
-    }
-    
-    public static ArrayList<String> getSortedList() {
-    	return sortedList;
-    }
-    
-    public static void setSortedList(ArrayList<String> sortedList) {
-    	MainProgWithFunctions.sortedList = sortedList;
-    }
-    
-    public static ArrayList<String> getUnsortedList() {
-    	return unsortedList;
-    }
-    
-    public static void setUnsortedList(ArrayList<String> unsortedList) {
-    	MainProgWithFunctions.unsortedList = unsortedList;
     }
         
 }
