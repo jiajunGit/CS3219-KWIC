@@ -4,13 +4,14 @@ public class Controller {
 	public Controller() {
 		
 		// Initialize data modules
+		ignoreWords = new IgnoreWordStorage();
 		inputLineStorage = new InputLineStorage();
 		circularLineStorage = new CircularLineStorage();
 		alphaSortedLineStorage = new AlphaSortedLineStorage();
 		
 		// Initialize function modules
-		lineReader = new LineReader(inputLineStorage);
-		circularShifter = new CircularShifter(circularLineStorage);
+		lineReader = new LineReader(inputLineStorage, ignoreWords);
+		circularShifter = new CircularShifter(circularLineStorage, ignoreWords);
 		alphabetizer = new Alphabetizer(alphaSortedLineStorage);
 		printer = new Printer();
 		
@@ -49,6 +50,7 @@ public class Controller {
 	}
 	
 	// Data Modules
+	private IgnoreWordStorage ignoreWords;
 	private InputLineStorage inputLineStorage;
 	private CircularLineStorage circularLineStorage;
 	private AlphaSortedLineStorage alphaSortedLineStorage;

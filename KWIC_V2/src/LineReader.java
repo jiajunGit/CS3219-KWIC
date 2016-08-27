@@ -3,13 +3,14 @@ import java.util.Observable;
 
 public class LineReader extends Observable {
 
-	public LineReader( InputLineStorage lineStorage ) {
+	public LineReader( InputLineStorage lineStorage, IgnoreWordStorage ignoreWordStorage ) {
 		m_LineStorage = lineStorage;
+		m_IgnoreWords = ignoreWordStorage;
 	}
 	
 	public boolean read( String fileName ) {
 			
-		if(m_LineStorage == null) {
+		if(m_LineStorage == null || m_IgnoreWords == null) {
 			return false;
 		}
 		
@@ -41,7 +42,7 @@ public class LineReader extends Observable {
 	
 	public boolean read() {
 		
-		if(m_LineStorage == null) {
+		if(m_LineStorage == null || m_IgnoreWords == null) {
 			return false;
 		}
 		
@@ -80,7 +81,6 @@ public class LineReader extends Observable {
 			
 			char charHolder;
 			int numCharRead = 0;
-			IgnoreWordStorage ignoreWordStore = IgnoreWordStorage.getInstance();
 			StringBuilder wordHolder = new StringBuilder();
 			
 			while( numCharRead >= 0 ){
@@ -98,7 +98,7 @@ public class LineReader extends Observable {
 						case ',':
 							
 							if( wordHolder.length() > 0 ){
-								ignoreWordStore.addIgnoreWord(wordHolder.toString());
+								m_IgnoreWords.addIgnoreWord(wordHolder.toString());
 								wordHolder.setLength(0);
 							}
 							break;
@@ -223,6 +223,7 @@ public class LineReader extends Observable {
 	}
 	
 	private InputLineStorage m_LineStorage;
+	private IgnoreWordStorage m_IgnoreWords;
 	
 	private final int READ_BUF_SIZE = 10000;
 	private byte []m_ReadBuf = new byte[READ_BUF_SIZE];

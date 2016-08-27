@@ -4,13 +4,14 @@ import java.util.Observer;
 
 public class CircularShifter extends Observable implements Observer {
 
-	public CircularShifter( CircularLineStorage lineStorage ) {
+	public CircularShifter( CircularLineStorage lineStorage, IgnoreWordStorage ignoreWordStorage ) {
 		m_LineStorage = lineStorage;
+		m_IgnoreWords = ignoreWordStorage;
 	}
 	
 	public boolean shift( AbstractLineStorage lineStorage, int changedLineIdx ) {
 		
-		if( lineStorage == null || m_LineStorage == null ) {
+		if( lineStorage == null || m_LineStorage == null || m_IgnoreWords == null ) {
 			return false;
 		}
 		
@@ -54,14 +55,13 @@ public class CircularShifter extends Observable implements Observer {
 		}
 		
 		HashSet<String> duplicateWords = new HashSet<String>();
-		IgnoreWordStorage ignoreWords = IgnoreWordStorage.getInstance();
 		String word;
 		
 		for( int i = 0, size = line.getWordCount(); i < size; ++i ) {
 			
 			word = line.getWord(i);
 			
-			if( !ignoreWords.isIgnoredWord(word) && !duplicateWords.contains(word) ){
+			if( !m_IgnoreWords.isIgnoredWord(word) && !duplicateWords.contains(word) ){
 				
 				if(m_LineStorage.addLine(line, lineIdx, i) < 0){
 					return false;
@@ -81,4 +81,5 @@ public class CircularShifter extends Observable implements Observer {
 	}
 	
 	private CircularLineStorage m_LineStorage;
+	private IgnoreWordStorage m_IgnoreWords;
 }
