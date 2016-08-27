@@ -7,158 +7,43 @@
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Scanner;
 
 public class MainProgWithFunctions {
 
     private static List<String> ignoreWords = new ArrayList<String>();
-
+    private static ArrayList<String> unsortedList = new ArrayList<String>();
+    private static ArrayList<String> sortedList = new ArrayList<String>();
+    
     public static void main(String[] args) {
 
-        String[] inputLines = processUserInput();
-        ArrayList<String> allUnsortedCombinations = executeShift(inputLines);
-        ArrayList<String> allSortedCombinations = sortOutput(allUnsortedCombinations);
-        printOutput(allSortedCombinations);
+        String[] inputLines = ProcessUserInput.processUserInput();
+        ExecuteShift.executeShift(inputLines);
+        SortOutput.sortOutput();
+        PrintOutput.printOutput();
     }
 
-    /**
-     * Processes the ignore words and input lines
-     * @return Processed input lines
-     */
-    private static String[] processUserInput() {
-
-        Scanner sc = new Scanner(System.in);
-                
-        while (true) {
-            String rawIgnoreInput = sc.nextLine();
-            if (rawIgnoreInput.charAt(0) == (64)) {
-                break;
-            }
-            
-            rawIgnoreInput = rawIgnoreInput.toLowerCase();
-            String[] ignoreInput = rawIgnoreInput.split(", ");
-            for (String word : ignoreInput) {
-                ignoreWords.add(word);
-            }
-            
-        }
+    public static List<String> getIgnoreWords() {
+    	return ignoreWords;
+    }
+    
+    public static void setIgnoreWords(List<String> ignoreWords) {
+    	MainProgWithFunctions.ignoreWords = ignoreWords;
+    }
+    
+    public static ArrayList<String> getSortedList() {
+    	return sortedList;
+    }
+    
+    public static void setSortedList(ArrayList<String> sortedList) {
+    	MainProgWithFunctions.sortedList = sortedList;
+    }
+    
+    public static ArrayList<String> getUnsortedList() {
+    	return unsortedList;
+    }
+    
+    public static void setUnsortedList(ArrayList<String> unsortedList) {
+    	MainProgWithFunctions.unsortedList = unsortedList;
+    }
         
-        String rawInput = sc.nextLine();
-        rawInput = rawInput.toLowerCase();
-        String[] inputLines = rawInput.split(", ");
-
-        if (sc != null) {
-            sc.close();
-        }
-        
-        return inputLines;
-    }
-
-    /**
-     * Executes the circular shift for the input lines
-     * @return All of the possible combinations
-     */
-    private static ArrayList<String> executeShift(String[] originalInput) {
-
-        ArrayList<String> lines = new ArrayList<String>();
-
-        for (int i = 0; i < originalInput.length; i++) {
-        	
-            String[] lineToShift = originalInput[i].split(" "); 
-         
-            int lengthOfLine = lineToShift.length;
-            for (int x = 0; x < lengthOfLine; x++) {
-            	Boolean isNotIgnoreWord = true;
-            	for (int y = 0; y < ignoreWords.size(); y++) {
-            		if (lineToShift[x].equals(ignoreWords.get(y))) {
-            			isNotIgnoreWord = false;
-            		}
-            	}
-            	if (isNotIgnoreWord) {
-            		if (lineToShift[x].length() > 1) {
-            			lineToShift[x] = lineToShift[x].substring(0, 1).toUpperCase() + lineToShift[x].substring(1);
-            		} else {
-            			lineToShift[x] = lineToShift[x].toUpperCase();
-            		}
-            	}
-            }
-            
-            int notIgnoreWordCount = 0;
-            Boolean isNotDuplicate = true;
-            ArrayList<String> allCurrentLineShifts = new ArrayList<String>();
-
-            while (isNotDuplicate) {
-
-                Boolean isIgnoreWord = false;                
-                
-                for (int j = 0; j < ignoreWords.size(); j++) {
-                    if (lineToShift[0].equals(ignoreWords.get(j))) {
-                        isIgnoreWord = true;
-                    } 
-                }
-                
-                if (!(isIgnoreWord)) {
-                    notIgnoreWordCount += 1;
-                }
-
-                if (notIgnoreWordCount == 2) {
-                    notIgnoreWordCount = 0;
-                    
-                    StringBuffer strBuf = new StringBuffer();
-                    strBuf.append(lineToShift[0]);
-                    for (int k = 1; k < lineToShift.length; k++) {
-                        strBuf.append(" ").append(lineToShift[k]);
-                    }
-
-                    String shiftedLine = strBuf.toString();
-                    
-                    for (int l = 0; l < allCurrentLineShifts.size(); l++) {
-                        if (shiftedLine.equals(allCurrentLineShifts.get(l))) {
-                            isNotDuplicate = false;
-                            break;
-                        }
-                    }
-                    
-                    if (isNotDuplicate) {
-                        lines.add(shiftedLine);
-                        allCurrentLineShifts.add(shiftedLine);
-                    } else {
-                        break;
-                    }
-                    
-                } else {
-                    String temp = lineToShift[0];
-                    for (int m = 0; m < lengthOfLine - 1; m++) {
-                        lineToShift[m] = lineToShift[m+1];
-                    }
-                    lineToShift[lengthOfLine - 1] = temp;
-                }
-                
-            }
-        }
-
-        return lines;
-    }
-
-    /**
-     * Conducts the sorting of the combinations by alphabetical order
-     * @return Sorted output
-     */
-    private static ArrayList<String> sortOutput(ArrayList<String> combinationList) {
-
-        Collections.sort(combinationList);
-        return combinationList;
-    }
-
-    /**
-     * Prints the alphabetically sorted list of combinations
-     */
-    private static void printOutput(ArrayList<String> sortedList) {
-
-        for (String outputLine : sortedList) {
-            System.out.println(outputLine);
-        }
-    }
 }
-
