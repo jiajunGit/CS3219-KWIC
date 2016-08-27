@@ -1,7 +1,7 @@
 
 public class KWIC {
 
-	private static final String INPUT_FILENAME = "TestCases/input2.in";
+	private static final String INPUT_FILENAME = "TestCases/input1.in";
 	
 	public static void main( String []args ){
 		

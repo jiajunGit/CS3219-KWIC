@@ -2,7 +2,9 @@ import java.util.HashSet;
 
 public class IgnoreWordStorage {
 
-	public IgnoreWordStorage(){}
+	public static IgnoreWordStorage getInstance(){
+		return ignoreWordStorageInstance;
+	}
 	
 	public void addIgnoreWord( String word ){
 		if(word != null){
@@ -18,5 +20,8 @@ public class IgnoreWordStorage {
 		return ignoreWords.contains(word);
 	}
 	
+	private IgnoreWordStorage(){}
+	
+	private static final IgnoreWordStorage ignoreWordStorageInstance = new IgnoreWordStorage();
 	private HashSet<String> ignoreWords = new HashSet<String>();
 }

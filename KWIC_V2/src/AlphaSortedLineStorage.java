@@ -1,6 +1,6 @@
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Observable;
-import java.util.SortedSet;
 
 public class AlphaSortedLineStorage extends Observable implements AbstractLineStorage {
 
@@ -11,7 +11,7 @@ public class AlphaSortedLineStorage extends Observable implements AbstractLineSt
 		m_CurrentItrIdx = -1;
 	}
 	
-	public boolean setLines( SortedSet<SortedEntry> sortedLineIdx ) {
+	public boolean setLines( Map<AbstractLine, Integer> sortedLineIdx ) {
 		
 		m_CurrentItr = null;
 		m_CurrentItrIdx = -1;
@@ -52,14 +52,14 @@ public class AlphaSortedLineStorage extends Observable implements AbstractLineSt
 		}
 		
 		int i = 0;
-		SortedEntry entry;
-		Iterator<SortedEntry> itr = m_SortedLines.iterator();
+		AbstractLine originalLine;
+		Iterator<AbstractLine> itr = m_SortedLines.keySet().iterator();
 		
 		while( itr.hasNext() ){
 			
-			entry = itr.next();
-			if( entry != null && i == lineIdx ){
-				return entry.getLine();
+			originalLine = itr.next();
+			if( i == lineIdx ){
+				return originalLine;
 			}
 			++i;
 		}
@@ -70,7 +70,7 @@ public class AlphaSortedLineStorage extends Observable implements AbstractLineSt
 	public String getWord( int lineIdx, int wordIdx ) {
 		
 		AbstractLine line = getLine(lineIdx);
-		return (line != null ? line.getWord(wordIdx) : null);
+		return line.getWord(wordIdx);
 	}
 	
 	public void initialiseIterator() {
@@ -79,7 +79,7 @@ public class AlphaSortedLineStorage extends Observable implements AbstractLineSt
 			m_CurrentItr = null;
 		}
 		else{
-			m_CurrentItr = m_SortedLines.iterator();
+			m_CurrentItr = m_SortedLines.keySet().iterator();
 		}
 		m_CurrentItrIdx = -1;
 	}
@@ -102,8 +102,8 @@ public class AlphaSortedLineStorage extends Observable implements AbstractLineSt
 			return null;
 		}
 
-		SortedEntry entry = m_CurrentItr.next();
-		if( entry == null || entry.getLine() == null ) {
+		AbstractLine line = m_CurrentItr.next();
+		if( line == null ) {
 			
 			m_CurrentItr = null;
 			m_CurrentItrIdx = -1;
@@ -111,10 +111,10 @@ public class AlphaSortedLineStorage extends Observable implements AbstractLineSt
 		}
 		++m_CurrentItrIdx;
 		
-		return entry.getLine();
+		return line;
 	}
 	
-	private SortedSet<SortedEntry> m_SortedLines;
-	private Iterator<SortedEntry> m_CurrentItr;
+	private Map<AbstractLine, Integer> m_SortedLines;
+	private Iterator<AbstractLine> m_CurrentItr;
 	private int m_CurrentItrIdx;
 }
