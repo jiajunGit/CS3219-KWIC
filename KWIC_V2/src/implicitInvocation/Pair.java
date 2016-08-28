@@ -1,3 +1,5 @@
+package implicitInvocation;
+
 
 public class Pair<T> {
 

@@ -1,3 +1,5 @@
+package implicitInvocation;
+
 import java.util.ArrayList;
 
 public class InputLine implements AbstractLine {

@@ -1,3 +1,5 @@
+package implicitInvocation;
+
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Observer;

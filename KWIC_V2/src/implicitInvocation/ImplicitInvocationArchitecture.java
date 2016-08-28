@@ -1,7 +1,8 @@
+package implicitInvocation;
 
-public class Controller {
+public class ImplicitInvocationArchitecture {
 
-	public Controller() {
+	public ImplicitInvocationArchitecture() {
 		
 		// Initialize data modules
 		ignoreWords = new IgnoreWordStorage();

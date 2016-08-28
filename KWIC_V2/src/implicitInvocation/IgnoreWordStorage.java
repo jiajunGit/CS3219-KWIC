@@ -1,3 +1,5 @@
+package implicitInvocation;
+
 import java.util.HashSet;
 
 public class IgnoreWordStorage {

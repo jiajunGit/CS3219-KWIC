@@ -1,3 +1,4 @@
+package sharedData;
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
@@ -12,7 +13,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.TreeSet;
 
-public class KWIC {
+public class SharedDataArchitecture {
 
 	HashSet<String> ignoreWords = new HashSet<String>();
 	ArrayList<ArrayList<String>> lines = new ArrayList<ArrayList<String>>();
@@ -122,7 +123,7 @@ public class KWIC {
 		return isPrinted;
 	}
 	
-	public boolean alphabetizer() {
+	public boolean alphabetize() {
 		
 		Tuple<ArrayList<String>, Integer, Integer> entry;
 		boolean isSet = false;
@@ -338,11 +339,61 @@ public class KWIC {
 		return isReadSuccessful;
 	}
 	
+	public boolean run( String fileName ) {
+		
+		if( !read(fileName) ){
+			System.out.println("Read error");
+			return false;
+		}
+		
+		if( !shift() ){
+			System.out.println("Shift error");
+			return false;
+		}
+		
+		if( !alphabetize() ){
+			System.out.println("Sort error");
+			return false;
+		}
+		
+		if( !print() ){
+			System.out.println("Print error");
+			return false;
+		}
+		
+		return true;
+	}
+	
+	public boolean run() {
+		
+		if( !read() ){
+			System.out.println("Read error");
+			return false;
+		}
+		
+		if( !shift() ){
+			System.out.println("Shift error");
+			return false;
+		}
+		
+		if( !alphabetize() ){
+			System.out.println("Sort error");
+			return false;
+		}
+		
+		if( !print() ){
+			System.out.println("Print error");
+			return false;
+		}
+		
+		return true;
+	}
+	
 	public static void main( String []argv ){
 		
-		KWIC kwic = new KWIC();
+		SharedDataArchitecture kwic = new SharedDataArchitecture();
 		
-		if( !kwic.read("TestCases/input1.in") ){
+		if( !kwic.read("TestCases/input4.in") ){
 			System.out.println("Read error");
 			return;
 		}
@@ -352,7 +403,7 @@ public class KWIC {
 			return;
 		}
 		
-		if( !kwic.alphabetizer() ){
+		if( !kwic.alphabetize() ){
 			System.out.println("Sort error");
 			return;
 		}

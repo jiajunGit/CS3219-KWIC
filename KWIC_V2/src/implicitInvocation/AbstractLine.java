@@ -1,3 +1,4 @@
+package implicitInvocation;
 
 public interface AbstractLine {
 
