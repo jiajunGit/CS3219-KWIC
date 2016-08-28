@@ -388,29 +388,4 @@ public class SharedDataArchitecture {
 		
 		return true;
 	}
-	
-	public static void main( String []argv ){
-		
-		SharedDataArchitecture kwic = new SharedDataArchitecture();
-		
-		if( !kwic.read("TestCases/input4.in") ){
-			System.out.println("Read error");
-			return;
-		}
-		
-		if( !kwic.shift() ){
-			System.out.println("Shift error");
-			return;
-		}
-		
-		if( !kwic.alphabetize() ){
-			System.out.println("Sort error");
-			return;
-		}
-		
-		if( !kwic.print() ){
-			System.out.println("Print error");
-			return;
-		}
-	}
 }

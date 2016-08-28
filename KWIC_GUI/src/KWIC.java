@@ -76,5 +76,6 @@ public class KWIC {
 		System.out.println( "line to process" );
 		System.out.println( "line to process" );
 		System.out.println( "..." );
+		System.out.println( "(To end manual user input, hold down ctrl + z at the same time and press enter)" );
 	}
 }
