@@ -3,6 +3,7 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -176,7 +177,28 @@ public class KWIC {
 	
 	public boolean read( String fileName ) {
 		
-		if(fileName == null) {
+		boolean hasRead = false;
+		
+		try {
+			
+			FileInputStream fs = new FileInputStream(fileName);
+			hasRead = read(fs);
+			fs.close();
+			
+		} catch (FileNotFoundException e) {
+			System.out.println("File is not found");
+		} catch (IOException e) {}
+		
+		return hasRead;
+	}
+	
+	public boolean read() {
+		return read(System.in);
+	}
+	
+	private boolean read( InputStream is ) {
+		
+		if(is == null) {
 			return false;
 		}
 		
@@ -184,8 +206,7 @@ public class KWIC {
 		
 		try{
 			
-			FileInputStream fs = new FileInputStream(fileName);
-			BufferedInputStream br = new BufferedInputStream( fs );
+			BufferedInputStream br = new BufferedInputStream( is );
 			
 			ArrayList<String> currentLine = null;
 			int readOffset = 0;
@@ -242,7 +263,6 @@ public class KWIC {
 				}
 			}
 			
-			isReadSuccessful = true;
 			numCharRead = 0;
 			charHolder = '\0';
 			wordHolder = new StringBuilder();
@@ -308,8 +328,9 @@ public class KWIC {
 				wordHolder.setLength(0);
 			}
 			
+			isReadSuccessful = true;
+			
 			br.close();
-			fs.close();
 		} 
 		catch( FileNotFoundException e ){}
 		catch( IOException e ) {}
@@ -321,7 +342,7 @@ public class KWIC {
 		
 		KWIC kwic = new KWIC();
 		
-		if( !kwic.read("TestCases/input3.in") ){
+		if( !kwic.read("TestCases/input1.in") ){
 			System.out.println("Read error");
 			return;
 		}
