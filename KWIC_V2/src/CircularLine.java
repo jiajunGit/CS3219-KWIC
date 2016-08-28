@@ -104,10 +104,14 @@ public class CircularLine implements AbstractLine {
 	
 	public String next() {
 		
+		String word = null;
+		
 		if(hasNext()){
-			return m_OriginalLine.getWord((m_CurrentItrIdx + m_StartOffset)%m_OriginalLine.getWordCount());
+			
+			word = m_OriginalLine.getWord((m_CurrentItrIdx + m_StartOffset)%m_OriginalLine.getWordCount());
+			++m_CurrentItrIdx;
 		}
-		return null;
+		return word;
 	}
 	
 	private int m_StartOffset = -1;

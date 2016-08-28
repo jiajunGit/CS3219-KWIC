@@ -13,7 +13,7 @@ public class Controller {
 		lineReader = new LineReader(inputLineStorage, ignoreWords);
 		circularShifter = new CircularShifter(circularLineStorage, ignoreWords);
 		alphabetizer = new Alphabetizer(alphaSortedLineStorage);
-		printer = new Printer();
+		printer = new Printer(ignoreWords);
 		
 		hasSetup = false;
 	}
