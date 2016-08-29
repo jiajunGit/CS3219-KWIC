@@ -8,7 +8,7 @@ import java.util.TreeSet;
 
 public class Alphabetizer extends Observable implements Observer {
 
-	public Alphabetizer( AlphaSortedLineStorage lineStorage ) {
+	public Alphabetizer( SortedLineStorage lineStorage ) {
 		
 		m_LineStorage = lineStorage;
 		m_SortedLines = null;
@@ -136,7 +136,7 @@ public class Alphabetizer extends Observable implements Observer {
 	
 	private AbstractLineStorage m_OriginalLines;
 	private TreeSet<SortedEntry> m_SortedLines;
-	private AlphaSortedLineStorage m_LineStorage;
+	private SortedLineStorage m_LineStorage;
 	
 	private final static int KEYWORD_INDEX = 0;
 }

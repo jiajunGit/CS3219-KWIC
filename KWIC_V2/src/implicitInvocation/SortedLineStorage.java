@@ -4,9 +4,9 @@ import java.util.Iterator;
 import java.util.Observable;
 import java.util.SortedSet;
 
-public class AlphaSortedLineStorage extends Observable implements AbstractLineStorage {
+public class SortedLineStorage extends Observable implements AbstractLineStorage {
 
-	public AlphaSortedLineStorage() {
+	public SortedLineStorage() {
 		
 		m_SortedLines = null;
 		m_CurrentItr = null;

@@ -8,7 +8,7 @@ public class ImplicitInvocationArchitecture {
 		ignoreWords = new IgnoreWordStorage();
 		inputLineStorage = new InputLineStorage();
 		circularLineStorage = new CircularLineStorage();
-		alphaSortedLineStorage = new AlphaSortedLineStorage();
+		alphaSortedLineStorage = new SortedLineStorage();
 		
 		// Initialize function modules
 		lineReader = new LineReader(inputLineStorage, ignoreWords);
@@ -54,7 +54,7 @@ public class ImplicitInvocationArchitecture {
 	private IgnoreWordStorage ignoreWords;
 	private InputLineStorage inputLineStorage;
 	private CircularLineStorage circularLineStorage;
-	private AlphaSortedLineStorage alphaSortedLineStorage;
+	private SortedLineStorage alphaSortedLineStorage;
 	
 	// Function Modules
 	private LineReader lineReader;
